@@ -1,0 +1,2 @@
+# Registration
+A registration page.
