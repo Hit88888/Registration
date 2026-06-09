@@ -1,0 +1,395 @@
+/* ============================================================
+   task3_registration.css
+   Aesthetic: Editorial two-column — dark navy sidebar,
+              clean white form, sharp details.
+   Fonts: Outfit (UI) + DM Mono (labels / badge)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+/* ---------- Tokens ---------- */
+:root {
+  --sidebar-bg:    #0b1320;
+  --sidebar-text:  #e8edf5;
+  --form-bg:       #f7f6f2;
+  --surface:       #ffffff;
+  --accent:        #2563eb;          /* Blue                */
+  --accent-light:  #eff6ff;
+  --accent-ring:   rgba(37,99,235,0.15);
+  --text:          #111827;
+  --muted:         #6b7280;
+  --border:        #e5e7eb;
+  --error:         #dc2626;
+  --error-bg:      #fef2f2;
+  --error-ring:    rgba(220,38,38,0.12);
+  --success:       #059669;
+  --success-bg:    #ecfdf5;
+  --req:           #dc2626;
+  --font:          'Outfit', sans-serif;
+  --font-mono:     'DM Mono', monospace;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+/* ---------- Body ---------- */
+body {
+  background: var(--form-bg);
+  font-family: var(--font);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ---------- Two-column Layout ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ─────────────────────────────────────────────── */
+.sidebar {
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 3.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.blob-a {
+  width: 280px; height: 280px;
+  bottom: -90px; right: -90px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.blob-b {
+  width: 180px; height: 180px;
+  top: -40px; left: -40px;
+  background: rgba(37,99,235,0.07);
+}
+
+.sidebar-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  height: 100%;
+}
+
+/* Department pill */
+.dept-pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: #60a5fa;
+  text-transform: uppercase;
+  border: 1px solid rgba(96,165,250,0.3);
+  padding: 0.28rem 0.75rem;
+  width: fit-content;
+}
+
+/* Main title */
+.sidebar-title {
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.sidebar-title em {
+  font-style: italic;
+  font-weight: 300;
+  color: #94a3b8;
+}
+
+/* Description */
+.sidebar-desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.75;
+  max-width: 270px;
+}
+
+/* Accent rule */
+.sidebar-rule {
+  height: 2px;
+  width: 48px;
+  background: linear-gradient(90deg, #3b82f6, transparent);
+}
+
+/* Fact list */
+.sidebar-facts {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.sidebar-facts li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+.sidebar-facts li svg { flex-shrink: 0; opacity: 0.7; }
+
+/* ── FORM AREA ────────────────────────────────────────────── */
+.form-area {
+  padding: 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  max-width: 660px;
+  animation: slideIn 0.4s ease both;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+/* Badge */
+.badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── Banners ─────────────────────────────────────────────── */
+.banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-left: 3px solid;
+  font-size: 0.88rem;
+  animation: popIn 0.25s ease both;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+.banner.success {
+  background: var(--success-bg);
+  border-color: var(--success);
+  color: #064e3b;
+}
+.banner.error {
+  background: var(--error-bg);
+  border-color: var(--error);
+  color: #7f1d1d;
+}
+.banner p     { margin-top: 0.2rem; font-size: 0.82rem; opacity: 0.85; }
+.banner strong { font-weight: 600; }
+
+.hidden { display: none !important; }
+
+/* ── Form Heading ────────────────────────────────────────── */
+.form-heading h2 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+.form-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.req-mark { color: var(--req); }
+
+/* ── Form Grid ───────────────────────────────────────────── */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.form-grid.submitted {
+  opacity: 0.45;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Two-column name row */
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Individual field */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field-group label,
+.field-label {
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* Text / Email / Tel inputs */
+.field-group input[type="text"],
+.field-group input[type="email"],
+.field-group input[type="tel"] {
+  padding: 0.72rem 0.95rem;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  border-radius: 0;      /* Sharp corners to match overall design */
+}
+
+.field-group input::placeholder { color: #b5bcc8; }
+
+.field-group input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+.field-group input.invalid {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px var(--error-ring);
+}
+
+/* Inline field error text */
+.field-err {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--error);
+  min-height: 1rem;
+}
+
+/* ── Radio Cards ─────────────────────────────────────────── */
+.radio-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.3rem;
+}
+
+/* Hide native radio */
+.radio-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-card {
+  cursor: pointer;
+  position: relative;
+  display: block;
+}
+
+/* Custom card visual */
+.radio-visual {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1rem;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.radio-card:hover .radio-visual {
+  border-color: #93c5fd;
+  background: #f0f7ff;
+}
+
+.radio-card input:checked + .radio-visual {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  box-shadow: 0 0 0 2px var(--accent-ring);
+}
+
+/* Custom radio ring */
+.radio-ring {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.radio-card input:checked + .radio-visual .radio-ring {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 8px var(--accent);
+}
+
+/* Text inside radio card */
+.radio-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.radio-copy strong { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+.radio-copy small  {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+/* ── Submit Button ───────────────────────────────────────── */
+.submit-btn {
+  padding: 1rem 2rem;
+  background: var(--sidebar-bg);
+  color: #fff;
+  border: none;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+  margin-top: 0.4rem;
+  touch-action: manipulation;
+}
+
+.submit-btn:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(37,99,235,0.28);
+}
+.submit-btn:active { transform: translateY(0); box-shadow: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    padding: 2rem 1.75rem;
+    min-height: unset;
+  }
+  .sidebar-title { font-size: 2rem; }
+  .form-area { padding: 2rem 1.5rem; max-width: unset; }
+}
+
+@media (max-width: 520px) {
+  .field-row  { grid-template-columns: 1fr; }
+  .radio-row  { grid-template-columns: 1fr; }
+}
